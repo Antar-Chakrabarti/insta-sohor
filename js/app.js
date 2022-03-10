@@ -16,8 +16,9 @@ const isLiked = (id) => {
 };
 
 const addToLiked = (id) => {
-    likedPostsId.includes(id)
-    showPosts(posts);
+    likedPostsId.push(id)
+    const postser = posts.filter((post) => !likedPostsId.includes(post.id));
+    showPosts(postser);
 
 
     //likedPostsId.plus(id); // includes == plus
@@ -27,7 +28,6 @@ const addToLiked = (id) => {
 const reportPost = (id) => {
     reportedPostsId.push(id);
     const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
-    console.log(remainingPosts)
     showPosts(remainingPosts);
 };
 
@@ -150,6 +150,7 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
+    document.getElementById("liked").innerHTML = '';
     const likedPosts = getLikedPosts();
     likedPosts.forEach((post) => {
         const div = createPost(post);
